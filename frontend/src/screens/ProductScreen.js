@@ -1,14 +1,26 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import Rating from '../components/Rating'
-import products from '../products'
-import Product from '../components/Product';
+import Rating from '../components/Rating';
+import axios from 'axios';
+//import Product from '../components/Product';
 
 const ProductScreen = () => {
+
+    const [product, setProduct] = useState({})
+
     const match = useParams()
-    const product = products.find(p => p._id === match.id)
-    const {image, name, _id, rating, numReviews, price, description, countInStock} = product;
+    
+    useEffect(() => {
+        const fetchProduct = async () => {
+           const {data} =  await axios(`/api/products/${match.id}`)
+
+           setProduct(data)
+        }
+        fetchProduct()
+    },[match])
+    
+    const {image, name, rating, numReviews, price, description, countInStock} = product;
 
   return (
     <>
@@ -23,7 +35,7 @@ const ProductScreen = () => {
         <Col md={3}>
             <ListGroup variant='flush'>
                 <ListGroup.Item> <h3>{name}</h3> </ListGroup.Item>
-                <ListGroup.Item> <Rating value={rating} text={`${numReviews} reviews`}/> </ListGroup.Item>
+                <ListGroup.Item> {rating && <Rating value={rating} text={`${numReviews} reviews`}/>} </ListGroup.Item>
                 <ListGroup.Item> Price: ${price} </ListGroup.Item>
                 <ListGroup.Item> Description: {description} </ListGroup.Item>
             </ListGroup>

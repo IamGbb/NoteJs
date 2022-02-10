@@ -4,7 +4,6 @@ import PropTypes from 'prop-types'
 
 
 const Rating = ({value, text, color}) => {
-
     const stars = [1,2,3,4,5]
 
   return (
