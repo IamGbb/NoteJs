@@ -30,7 +30,7 @@ const CartScreen = ({ history }) => {
 
     const checkoutHandler = () => {
         console.log('checkout')
-        navigate(`/login?redirect=shipping`)
+        navigate(`/login?redirect=/shipping`)
     }
 
   return (

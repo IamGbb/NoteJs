@@ -54,13 +54,6 @@ const ProfileScreen = () => {
         }
     }
 
-        const profileArray = [
-        {id: 'name', label: 'Name', placeholder: 'Enter your name', value: name , func: (e)=> setName(e.target.value)},
-        {id: 'email', label: 'Email Address', placeholder: 'Enter your email', value: email, func: (e)=> setEmail(e.target.value)}, 
-        {id: 'password', label: 'Password', placeholder: 'Enter your Password', value: password , func: (e)=> setPassword(e.target.value)},
-        {id: 'password', label: 'Confirm Password', placeholder: 'Confirm Password', value: confirmPassword , func: (e)=> setConfirmPassword(e.target.value)},
-    ]
-
   return (
     <Row>
         <Col md={3}>
@@ -73,16 +66,29 @@ const ProfileScreen = () => {
         {/* {loading && <Loader />} */}
         <Form onSubmit={submitHandler}>
 
-        {profileArray.map((field) => {
-            const {id, label, placeholder, value, func} = field;
-            return (
-                <Form.Group controlId={id} key={label}>
-                <Form.Label>{label}</Form.Label>
-                <Form.Control type={id} placeholder={placeholder} value={value}
-                onChange={func}></Form.Control>
+            <Form.Group controlId='name'>
+                <Form.Label>Name</Form.Label>
+                <Form.Control type='name' placeholder='Enter your name' value={name}
+                onChange={(e)=> setName(e.target.value)}></Form.Control>
             </Form.Group>
-            )
-        })}
+
+            <Form.Group controlId='email'>
+                <Form.Label>Email Address</Form.Label>
+                <Form.Control type='email' placeholder='Enter email' value={email}
+                onChange={(e)=> setEmail(e.target.value)}></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='password'>
+                <Form.Label>Password</Form.Label>
+                <Form.Control type='password' placeholder='Enter password' value={password}
+                onChange={(e)=> setPassword(e.target.value)}></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='confirmPassword'>
+                <Form.Label>Confirm Password</Form.Label>
+                <Form.Control type='password' placeholder='Confirm password' value={confirmPassword}
+                onChange={(e)=> setConfirmPassword(e.target.value)}></Form.Control>
+            </Form.Group>
 
             <Button type='submit' variant='primary'>
                 Update
