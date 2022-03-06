@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Form, Table, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector} from 'react-redux';
@@ -18,12 +18,11 @@ const ProfileScreen = () => {
     const [message, setMessage] = useState(null)
     const [success, setSuccess] = useState(false)
 
-    const location = useLocation()
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
     const userDetails = useSelector(state => state.userDetails)
-    const { loading, error, user } = userDetails
+    const { error, user } = userDetails
 
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
