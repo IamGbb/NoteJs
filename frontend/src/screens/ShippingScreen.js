@@ -11,10 +11,12 @@ const ShippingScreen = () => {
     const cart = useSelector(state => state.cart)
     const { shippingAddress } = cart
 
-    const [address, setAddress] = useState(shippingAddress.address)
-    const [city, setCity] = useState(shippingAddress.city)
-    const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
-    const [country, setCountry] = useState(shippingAddress.country)
+    console.log(cart.cartItems)
+
+    const [address, setAddress] = useState(shippingAddress.address ? shippingAddress.address : '')
+    const [city, setCity] = useState(shippingAddress.city ? shippingAddress.city : '')
+    const [postalCode, setPostalCode] = useState(shippingAddress.postalCode ? shippingAddress.postalCode : '')
+    const [country, setCountry] = useState(shippingAddress.country ? shippingAddress.country : '')
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -31,7 +33,7 @@ const ShippingScreen = () => {
         {id: 'postalCode', label: 'Postal Code', placeholder: 'Enter your Postal Code', value: postalCode , func: (e)=> setPostalCode(e.target.value)},
         {id: 'country', label: 'Country', placeholder: 'Enter your country', value: country , func: (e)=> setCountry(e.target.value)},
     ]
-
+    
   return (
     <FormContainer>
         <CheckoutSteps step1 step2/>
@@ -40,7 +42,7 @@ const ShippingScreen = () => {
 
             {shippingArray.map((input) => {
                 const {id, label, placeholder, value, func} = input
-                console.log(placeholder)
+
                 return (
                     <Form.Group controlId={id} key={id}>
                     <Form.Label>{label}</Form.Label>

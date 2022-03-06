@@ -63,9 +63,7 @@ const PlaceOrderScreen = () => {
                         <br/>
                         {postalCode}
                         <br/>
-                        {country}
-                        
-
+                        {country}                       
                     </p>
                 </ListGroup.Item>
 
