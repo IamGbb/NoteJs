@@ -16,9 +16,13 @@ const UserEditScreen = () => {
     const dispatch = useDispatch()
     const userId = useParams().id
     const navigate = useNavigate()
+    
 
     const userDetails = useSelector(state => state.userDetails)
     const { loading, error, user } = userDetails
+
+    const userLogin = useSelector(state => state.userLogin)
+    const adminId = userLogin.userInfo._id
 
     const userUpdate = useSelector(state => state.userUpdate)
     const { loading: loadingUpdate, error: errorUpdate, success: successUpdate } = userUpdate
@@ -42,14 +46,11 @@ const UserEditScreen = () => {
 
     const submitHandler = (e) => {
         e.preventDefault();
-        dispatch(updateUser({ _id: userId, name, email, isAdmin}))
-        
+        dispatch(updateUser({_id: userId, name, email, isAdmin }))  
     }
 
     const adminCheck = (e) => {
-        //setIsAdmin(e.target.checked);
-        console.log(e.target.checked)
-        console.log(isAdmin)
+        setIsAdmin(!isAdmin)
     }
 
     const profileArray = [
@@ -78,13 +79,19 @@ const UserEditScreen = () => {
             </Form.Group>
             )
         })}
-        
+            <br/>
             <Form.Group controlId='isadmin'>
-                <Form.Check type='checkbox' label='Is Admin' checked={isAdmin}
-                onChange={(e) => setIsAdmin(e.target.checked)}>
-                </Form.Check>
+                <Form.Check 
+                type="switch"
+                id="isAdmin"
+                label="Admin"
+                checked={isAdmin}
+                disabled={adminId === user._id}
+                onChange={(e) => setIsAdmin(e.target.checked)}
+                />
             </Form.Group>
-            
+
+            <br/>
             <Button type='submit' variant='primary'>
                 Update
             </Button>
