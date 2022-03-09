@@ -49,10 +49,6 @@ const UserEditScreen = () => {
         dispatch(updateUser({_id: userId, name, email, isAdmin }))  
     }
 
-    const adminCheck = (e) => {
-        setIsAdmin(!isAdmin)
-    }
-
     const profileArray = [
         {id: 'name', label: 'Name', placeholder: 'Enter your name', value: name , func: (e)=> setName(e.target.value)},
         {id: 'email', label: 'Email Address', placeholder: 'Enter your email', value: email, func: (e)=> setEmail(e.target.value)},     ]
