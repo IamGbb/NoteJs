@@ -5,10 +5,10 @@ import {
     ORDER_LIST_MY_REQUEST, ORDER_LIST_MY_SUCCESS, ORDER_LIST_MY_FAIL,
     ORDER_LIST_REQUEST, ORDER_LIST_SUCCESS, ORDER_LIST_FAIL,
     ORDER_DELIVER_REQUEST, ORDER_DELIVER_SUCCESS, ORDER_DELIVER_FAIL,
-
-
 } from '../constants/orderConstants'
+import { CART_CLEAR_ITEMS } from '../constants/cartConstants'
 import axios from 'axios'
+import { logout } from './userActions'
 
 export const createOrder = (order) => async (dispatch, getState) => {
     try {
@@ -31,15 +31,26 @@ export const createOrder = (order) => async (dispatch, getState) => {
         type: ORDER_CREATE_SUCCESS,
         payload: data
         })
-        
-    } catch (error) {
         dispatch({
-        type: ORDER_CREATE_FAIL,
-        payload: error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message
-    })
-    }
+        type: CART_CLEAR_ITEMS,
+        payload: data,
+        })
+        localStorage.removeItem('cartItems')
+        } catch (error) {
+        const message =
+        error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        if (message === 'Not authorized, token failed') {
+        dispatch(logout())
+        }
+            dispatch({
+            type: ORDER_CREATE_FAIL,
+            payload: error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message
+        })
+        }
 }
 
 export const getOrderDetails = (id) => async (dispatch, getState) => {

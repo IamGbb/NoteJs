@@ -12,7 +12,6 @@ import {PRODUCT_REVIEW_RESET} from '../constants/productConstants'
 const ProductScreen = () => {
     const [qty, setQty] = useState(1)
     const [rating, setRating] = useState(0)
-    const [ratingText, setRatingText] = useState('')
     const [comment, setComment] = useState('')
 
 
@@ -35,7 +34,6 @@ const ProductScreen = () => {
             alert ('Review Submitted')
             setRating(0)
             setComment('')
-            setRatingText('')
             dispatch({ type: PRODUCT_REVIEW_RESET })
         }
         dispatch(listProductDetails(match.id))
@@ -43,23 +41,17 @@ const ProductScreen = () => {
     
     const addToCartHandler = () => {
         navigate(`/cart/${match.id}?qty=${qty}`)
+        //history.push(`/cart/${match}?qty=${qty}`)
     }
 
-    const submitHandler= (e) => {
+    const submitHandler=(e) => {
         e.preventDefault()
         dispatch(reviewProduct(match.id, {
             rating, comment
         }))
     }
 
-    const handleRating = (star) => {
-        setRating(star.r);
-        setRatingText(star.t);
-    }
-
     const {image, name, rating: productRating, numReviews, price, description, countInStock} = product;
-
-    const stars = [{r: 1, t: 'Poor'},{r: 2, t: 'Fair'},{r: 3, t: 'Good'},{r: 4, t: 'Very Good'},{r: 5, t: 'Excellent'}]
 
   return (
   <>
@@ -158,14 +150,14 @@ const ProductScreen = () => {
                 <Form onSubmit={submitHandler}>
                     <Form.Group controlId='rating'>
                         <Form.Label>Rating</Form.Label>
-                        <br/>
-                        {stars.map((star) => {
-                        return (
-                            <span key={star.r} onClick={()=> handleRating(star)}>
-                                <i style={{color: '#F5BE2A'}} className={rating >= star.r ? 'fas fa-star' : 'far fa-star'}/>
-                            </span>
-                        )})}
-                        <p>{ratingText}</p>
+                        <Form.Control as='select' value={rating} onChange={(e) => setRating(e.target.value)}>
+                            <option value=''>Select...</option>
+                            <option value='1'>1 - Poor</option>
+                            <option value='2'>2 - Fair</option>
+                            <option value='3'>3 - Good</option>
+                            <option value='4'>4 - Very Good</option>
+                            <option value='5'>5 - Excellent</option>
+                        </Form.Control>
                     </Form.Group>
 
                     <Form.Group controlId='comment'>

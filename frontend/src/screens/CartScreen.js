@@ -2,11 +2,11 @@ import React, {useEffect} from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { Link, useParams, useLocation, useNavigate } from 'react-router-dom';
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap';
+import { Row, Col, ListGroup, Image, Form, Button, Card, InputGroup } from 'react-bootstrap';
 import { addToCart, removeFromCart } from '../actions/cartActions'
 
 
-const CartScreen = ({ history }) => {
+const CartScreen = () => {
     const productId = useParams().id
     const location = useLocation()
     const navigate = useNavigate()
@@ -18,11 +18,16 @@ const CartScreen = ({ history }) => {
     const cart = useSelector(state => state.cart)
     const { cartItems } = cart
 
+    const userLogin = useSelector(state => state.userLogin)
+    const { userInfo } = userLogin
+
     useEffect(() => {
         if(productId) {
             dispatch(addToCart(productId, qty))
         }
-    }, [dispatch, productId, qty])
+    }, [dispatch, productId, qty, userInfo])
+
+
     
     const removeFromCartHandler = (id) => {
         dispatch(removeFromCart(id))

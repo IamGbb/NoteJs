@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom';
 //import products from '../products';
 import {Row, Col} from 'react-bootstrap';
 import Product from '../components/Product';
@@ -9,6 +10,9 @@ import Loader from '../components/Loader'
 
 
 const HomeScreen = () => {
+  const match = useParams()
+  const keyword = match.keyword
+
   const dispatch = useDispatch()
 
   const productList = useSelector(state => state.productList)
@@ -17,8 +21,8 @@ const HomeScreen = () => {
   
 
   useEffect(() => {
-   dispatch(listProducts())
-  }, [dispatch])
+   dispatch(listProducts(keyword))
+  }, [dispatch, keyword])
 
   return (
     <>
@@ -28,7 +32,8 @@ const HomeScreen = () => {
     ) : error ? (
     <Message variant="danger">{error}</Message> 
     ) : (
-    <Row>
+    products.length > 0 ? 
+    (<Row>
         {products.map((product) => (
             
             <Col key={product._id} sm={12} md={6} lg={4} xl={3} className='align-items-stretch d-flex'>
@@ -39,6 +44,8 @@ const HomeScreen = () => {
         
             
     </Row>
+    ) : ( <h1>Sorry, we couldn't find any products</h1>)
+
     )}
     </>
   )
