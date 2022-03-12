@@ -8,6 +8,7 @@ import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions
 import axios from 'axios';
 import { PayPalButton } from 'react-paypal-button-v2'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
+import Meta from '../components/Meta'
 
 export const OrderScreen = () => {
   const dispatch = useDispatch()
@@ -76,6 +77,7 @@ const deliverHandler = () => {
 
    return loading ? <Loader /> : error ? <Message variant='danger'>{error}</Message>
     : <>
+    <Meta title='Order Details' />
     <h1>Order {order._id}</h1>
     <Row>
       <Col md={8}>

@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { listProductDetails, updateProduct } from '../actions/productActions';
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants';
+import Meta from '../components/Meta'
 
 const ProductEditScreen = () => {
     const [name, setName] = useState('')
@@ -92,6 +93,7 @@ const ProductEditScreen = () => {
 
   return (
       <>
+      <Meta title='Admin | Edit Product' />
       <Link to='/admin/productlist' className='btn btn-light my-3'>Go Back </Link>
 
     <FormContainer>

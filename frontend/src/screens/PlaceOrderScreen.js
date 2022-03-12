@@ -7,6 +7,7 @@ import Message from '../components/Message';
 import CheckoutSteps from '../components/CheckoutSteps';
 import { createOrder } from '../actions/orderActions';
 import { ORDER_CREATE_RESET } from '../constants/orderConstants'
+import Meta from '../components/Meta'
 
 const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
@@ -51,6 +52,7 @@ const PlaceOrderScreen = () => {
     const {address, city, postalCode, country}= cart.shippingAddress
   return (
     <>
+    <Meta title='Order | Place Order' />
     <CheckoutSteps step1 step2 step3 step4/>
     <Row>
         <Col md={8}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { LinkContainer } from 'react-router-bootstrap'
-import { Navbar, Nav, Container, NavDropdown, Image } from 'react-bootstrap';
+import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap';
 import { logout } from '../actions/userActions'
 import SearchBox from './SearchBox'
 
@@ -11,29 +11,15 @@ const Header = () => {
     const userLogin = useSelector(state => state.userLogin)
     const { userInfo } = userLogin
 
-    const cart = useSelector(state => state.cart)
-    const { cartItems } = cart
-
     const logoutHandler = () => {
         dispatch(logout())
     }
-
-    const overallqty = () => {
-        let qty = 0;
-        cartItems.map((item) => {
-            qty += item.qty
-        })
-        return qty
-    }
-
-    return (
+  return (
     <header>
         <Navbar bg="dark" variant='dark' expand="lg" collapseOnSelect>
             <Container>
                 <LinkContainer to='/'>
-                    <Navbar.Brand>
-                        <Image src="images/noteJs2.png" className="logo" />
-                    </Navbar.Brand>
+                    <Navbar.Brand>ProShop</Navbar.Brand>
                 </LinkContainer>
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -41,14 +27,9 @@ const Header = () => {
                     <SearchBox />
                 <Nav className="ms-auto">
 
-                
-                {cartItems.length > 0 && <span className='cart-value'>{overallqty()}</span>}
                 <LinkContainer to='/cart'>
-                    <Nav.Link><i className ='fas fa-shopping-cart'/>
-                    <span> Cart</span></Nav.Link>
-                    
+                    <Nav.Link><i className ='fas fa-shopping-cart'/> Cart</Nav.Link>
                 </LinkContainer>
-                
                 
                 {userInfo ? (
                     <NavDropdown title={userInfo.name} id='username'>
@@ -62,7 +43,6 @@ const Header = () => {
                     <Nav.Link><i className ='fas fa-user'/> Sign In</Nav.Link>
                 </LinkContainer>              
                 )} 
-
                 {userInfo && userInfo.isAdmin && (
                     <NavDropdown title='admin' id='adminmenu'>
                         <LinkContainer to='/admin/userlist'>

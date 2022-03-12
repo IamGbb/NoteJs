@@ -8,6 +8,8 @@ import Loader from '../components/Loader';
 import { getUserDetails, updateUserProfile } from '../actions/userActions';
 import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants';
 import { listMyOrders } from '../actions/orderActions'
+import Meta from '../components/Meta'
+
 
 
 const ProfileScreen = () => {
@@ -69,6 +71,7 @@ const ProfileScreen = () => {
 
   return (
     <Row>
+        <Meta title='My Profile' />
         <Col md={3}>
             <h2>User Profile</h2>
 
@@ -117,7 +120,7 @@ const ProfileScreen = () => {
                             <td>${order.totalPrice}</td>
                             <td>{order.isPaid ? order.paidAt.substring(0, 10) : <i className='fas fa-times' style={{color: "red"}}/>}</td>
                             <td>{order.isDelivered ? order.deliveredAt.substring(0, 10) : <i className='fas fa-times' style={{color: "red"}}/>}</td>
-                            <td><LinkContainer to={`/order/${order._id}`}>
+                            <td><LinkContainer to={`/orders/${order._id}`}>
                                     <Button className='btn-sm' variant='light'>Details</Button>
                                 </LinkContainer></td>
                         </tr>

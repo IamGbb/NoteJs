@@ -8,6 +8,7 @@ import Loader from '../components/Loader';
 import { listProducts, deleteProduct, createProduct } from '../actions/productActions'
 import { PRODUCT_CREATE_RESET } from '../constants/productConstants'
 import Paginate from '../components/Paginate';
+import Meta from '../components/Meta'
 
 const ProductListScreen = () => {
     const match = useParams()
@@ -56,6 +57,7 @@ const ProductListScreen = () => {
 
     return (
         <>
+        <Meta title='Admin | Products' />
             <Row className='align-items-center'>
                 <Col>
                 <h1>Products</h1>

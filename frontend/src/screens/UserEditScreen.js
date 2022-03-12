@@ -7,6 +7,8 @@ import Loader from '../components/Loader';
 import FormContainer from '../components/FormContainer';
 import { getUserDetails, updateUser } from '../actions/userActions';
 import { USER_UPDATE_RESET } from '../constants/userConstants'
+import Meta from '../components/Meta'
+
 
 const UserEditScreen = () => {
     const [name, setName] = useState('')
@@ -58,6 +60,7 @@ const UserEditScreen = () => {
       <Link to='/admin/userlist' className='btn btn-light my-3'>Go Back </Link>
 
     <FormContainer>
+        <Meta title='Admin | Edit User' />
         <h1>Edit User</h1>
         {loadingUpdate && <Loader />}
         {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>}

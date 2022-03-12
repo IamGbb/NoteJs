@@ -49,3 +49,23 @@ h2 {
   display: flex;
  justify-content: center;
 }
+
+.cart-value {
+    background: red;
+    position:absolute;
+    width: 10px;
+    height: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    color: white;
+    padding: 10px;
+  }
+
+  .logo {
+   width: 2.5rem;
+   margin-bottom: 10px;
+   margin-right: 10px;
+  }

@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { Helmet } from 'react-helmet'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, Link } from 'react-router-dom';
 //import products from '../products';
