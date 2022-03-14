@@ -1,39 +1,80 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Card, Button } from 'react-bootstrap'
-import Rating from './Rating'
+import styled from 'styled-components'
+import { formatPrice } from '../utils/helpers'
+import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-const Product = ({product}) => {
-    const navigate = useNavigate()
-    const {_id, name, image, rating, numReviews, price, qty, countInStock} = product;
-
-const addToCartHandler = () => {
-        navigate(`/cart/${_id}?qty=1`)
-    }
+const Product = ({image, name, price, id}) => {
   return (
-    <Card className='my-3 p-3 rounded'>
-        <Link to={`/product/${_id}`}>
-            <Card.Img src={image} variant ='top'/>
+    <Wrapper>
+      <div className="container">
+        <img src={image} alt={name} />
+        <Link to={`/products/${id}`} className="link">
+          <FaSearch />
         </Link>
-
-        <Card.Body>
-            <Link to={`/product/${_id}`}>
-            <Card.Title><strong>{name}</strong></Card.Title>
-        </Link>
-        <Card.Text as='div'></Card.Text>
-        <Rating value={rating} text={`${numReviews} reviews`} />
-        
-        <Card.Text as='h3'>₪{price}</Card.Text>
-        </Card.Body>
-        <Button 
-          onClick={addToCartHandler}
-          className="btn-block" 
-          variant={countInStock === 0 ? "light" : "primary"}
-          type='button' 
-          disabled={countInStock === 0}>{countInStock === 0 ? "Out of Stock" : "Add to Cart"}</Button>
-      </Card>
+      </div>
+      <footer>
+        <h5>{name}</h5>
+        <p>{formatPrice(price)}</p>
+      </footer>
+    </Wrapper>
   )
 }
 
+const Wrapper = styled.article`
+  .container {
+    position: relative;
+    background: var(--clr-black);
+    border-radius: var(--radius);
+  }
+  img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: var(--radius);
+    transition: var(--transition);
+  }
+  .link {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--clr-primary-5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    transition: var(--transition);
+    opacity: 0;
+    cursor: pointer;
+    svg {
+      font-size: 1.25rem;
+      color: var(--clr-white);
+    }
+  }
+  .container:hover img {
+    opacity: 0.5;
+  }
+  .container:hover .link {
+    opacity: 1;
+  }
+  footer {
+    margin-top: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  footer h5,
+  footer p {
+    margin-bottom: 0;
+    font-weight: 400;
+  }
+
+  footer p {
+    color: var(--clr-primary-5);
+    letter-spacing: var(--spacing);
+  }
+`
 export default Product
