@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { Navbar, Sidebar, Footer } from './components'
 import {Home, About, Cart, Checkout, Error, Products, SingleProduct, PrivateRoute, AuthWrapper} from './pages';
 
-
 function App() {
   return (
     <AuthWrapper>
