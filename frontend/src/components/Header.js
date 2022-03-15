@@ -39,14 +39,14 @@ const Header = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <SearchBox />
-                <Nav className="ms-auto">
 
                 
+                <Nav className="ms-auto">
+
                 {cartItems.length > 0 && <span className='cart-value'>{overallqty()}</span>}
                 <LinkContainer to='/cart'>
                     <Nav.Link><i className ='fas fa-shopping-cart'/>
-                    <span> Cart</span></Nav.Link>
-                    
+                    <span> Cart</span></Nav.Link>                  
                 </LinkContainer>
                 
                 

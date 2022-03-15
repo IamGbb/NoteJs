@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Form, Table, Button, Row, Col } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useDispatch, useSelector} from 'react-redux';
@@ -79,13 +79,13 @@ const ProfileScreen = () => {
         {message && <Message variant='danger'>{message}</Message>}
         {error && <Message variant='danger'>{error}</Message>}
         {success && <Message variant='success'>Profile Updated</Message>}
-        {/* {loading && <Loader />} */}
+
         <Form onSubmit={submitHandler}>
 
         {profileArray.map((field) => {
             const {id, label, placeholder, value, func} = field;
             return (
-                <Form.Group controlId={id} key={label}>
+                <Form.Group controlId={id} key={label} className='mb-4'>
                 <Form.Label>{label}</Form.Label>
                 <Form.Control type={id} placeholder={placeholder} value={value}
                 onChange={func}></Form.Control>
@@ -101,7 +101,7 @@ const ProfileScreen = () => {
         <Col md={9}>
             <h2>My Orders</h2>
             {loadingOrders ? <Loader /> : errorOrders ? <Message variant='danger'>{errorOrders}</Message>
-            : <Table striped bordered hover responsive className='table-sm'>
+            : orders.length <= 0 ? <Message>No orders yet. <Link to='/'>Start Shopping</Link></Message>  : <Table striped bordered hover responsive className='table-sm'>
                 <thead>
                     <tr>
                         <th>ID</th>
