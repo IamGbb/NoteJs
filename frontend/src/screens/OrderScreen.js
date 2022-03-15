@@ -128,7 +128,7 @@ const deliverHandler = () => {
                                 </Col>
 
                                 <Col md={4}>
-                                    {item.qty} x ${item.price} = ${item.qty * item.price}
+                                    {item.qty} x ₪{item.price} = ₪{item.qty * item.price}
                                 </Col>
                             </Row>
                         </ListGroup.Item>
@@ -149,28 +149,28 @@ const deliverHandler = () => {
                 <ListGroup.Item>
                     <Row>
                         <Col>Items</Col>
-                        <Col>${order.itemsPrice}</Col>
+                        <Col>₪{order.itemsPrice}</Col>
                     </Row>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
                     <Row>
                         <Col>Shipping</Col>
-                        <Col>${order.shippingPrice}</Col>
+                        <Col>₪{order.shippingPrice}</Col>
                     </Row>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
                     <Row>
                         <Col>Tax</Col>
-                        <Col>${order.taxPrice}</Col>
+                        <Col>₪{order.taxPrice}</Col>
                     </Row>
                 </ListGroup.Item>
 
                 <ListGroup.Item>
                     <Row>
                         <Col>Total</Col>
-                        <Col>${order.totalPrice}</Col>
+                        <Col>₪{order.totalPrice}</Col>
                     </Row>
                 </ListGroup.Item>
                 {!order.isPaid && (
@@ -180,6 +180,9 @@ const deliverHandler = () => {
                         <Loader /> 
                         ) : (
                         <PayPalButton amount={order.totalPrice} onSuccess={successPaymentHandler}/>)}
+                        <h4>Use these credentials on paypal:</h4>
+                        <p>email: sb-lc47ci14186809@personal.example.com</p>
+                        <p>password: OoTV5.f7</p>
                     </ListGroup.Item>
                 )}
                 {loadingDeliver && <Loader/>}

@@ -45,7 +45,7 @@ const ShippingScreen = () => {
                 const {id, label, placeholder, value, func} = input
 
                 return (
-                    <Form.Group controlId={id} key={id}>
+                    <Form.Group controlId={id} key={id} className='mb-4'>
                     <Form.Label>{label}</Form.Label>
                     <Form.Control type='text' placeholder={placeholder} value={value}
                     required onChange={func}></Form.Control>
